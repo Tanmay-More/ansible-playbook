@@ -1,0 +1,34 @@
+-
+ name: 'Initial commands'
+ hosts: localhost
+ vars:
+  gitPath: 'https://github.com/Tanmay-More/Login-Page.git'
+  repoName: 'Login-Page'
+ tasks: 
+  -
+   name: 'get node js package using curl'
+   command: 'curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -'
+  -
+   name: 'install node js'
+   command: 'sudo apt-get install -y nodejs'
+  -
+   name: 'create react app'
+   command: 'npx create-react-app login-app'
+  -
+   name: 'clone git repo'
+   command: 'git clone {{gitPath}}'
+  -
+   name: 'moving node modules'
+   command: 'mv login-app/node_modules {{repoName}}'
+  -
+   name: 'remove unwanted files'
+   command: 'rm -rf login-app'
+  -
+   name: 'install react-router-dom'
+   command: chdir='/home/ubuntu/{{repoName}}' npm install react-router-dom
+  -
+   name: 'install validator'
+   command: chdir='/home/ubuntu/{{repoName}}' npm install validator
+  -
+   name: 'start running app in background'
+   command: chdir='/home/ubuntu/{{repoName}}' npm start &
