@@ -4,31 +4,60 @@
  vars:
   gitPath: 'https://github.com/Tanmay-More/Login-Page.git'
   repoName: 'Login-Page'
- tasks: 
+  appPath: '/home/dell/Desktop/Ansible/first/{{repoName}}'
+  appInPath: '/home/dell/Desktop/Ansible/first'
+ tasks:
+  -
+   name: 'checking files'
+   command: chdir='{{appInPath}}' ls
+   register: files_list
+  -
+   name: 'updating package list'
+   shell: 'sudo apt update'
+   when: files_list.stdout.find("login-app") == -1
+  -
+   name: 'installing curl'
+   shell: 'sudo apt install curl'
+   when: files_list.stdout.find("login-app") == -1
   -
    name: 'get node js package using curl'
-   command: 'curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -'
+   shell: 'curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -'
+   when: files_list.stdout.find("login-app") == -1
   -
    name: 'install node js'
    command: 'sudo apt-get install -y nodejs'
+   when: files_list.stdout.find("login-app") == -1
   -
    name: 'create react app'
-   command: 'npx create-react-app login-app'
+   command: 'npx create-react-app login'
   -
    name: 'clone git repo'
    command: 'git clone {{gitPath}}'
   -
    name: 'moving node modules'
-   command: 'mv login-app/node_modules {{repoName}}'
+   command: 'mv login/node_modules {{repoName}}'
   -
    name: 'remove unwanted files'
-   command: 'rm -rf login-app'
+   command: 'rm -rf login'
   -
    name: 'install react-router-dom'
-   command: chdir='/home/ubuntu/{{repoName}}' npm install react-router-dom
+   command: chdir='{{appPath}}' npm install react-router-dom
   -
    name: 'install validator'
-   command: chdir='/home/ubuntu/{{repoName}}' npm install validator
+   command: chdir='{{appPath}}' npm install validator
+  -
+   name: 'delete old app before updating to new one'
+   command: chdir='{{appInPath}}' rm -rf login-app
+   when: files_list.stdout.find("login-app") != -1
+  -
+   name: 'create new app dir'
+   command: chdir='{{appInPath}}' mkdir login-app
+  -
+   name: 'move files to new app dir'
+   shell: mv {{appInPath}}/Login-Page/* {{appInPath}}/login-app
+  -
+   name: 'remove old dir'
+   command: chdir='{{appInPath}}' rm -rf '{{repoName}}'
   -
    name: 'start running app in background'
-   command: chdir='/home/ubuntu/{{repoName}}' npm start &
+   command: chdir='{{appInPath}}/login-app' npm start &
