@@ -4,8 +4,8 @@
  vars:
   gitPath: 'https://github.com/Tanmay-More/Login-Page.git'
   repoName: 'Login-Page'
-  appPath: '/home/test-ubuntu/Desktop/workspace/sample-job/{{repoName}}'
-  appInPath: '/home/test-ubuntu/Desktop/workspace/sample-job'
+  appPath: '/home/dell/Desktop/Ansible/first/{{repoName}}'
+  appInPath: '/home/dell/Desktop/Ansible/first'
  tasks:
   -
    name: 'checking files'
@@ -28,23 +28,8 @@
    command: 'sudo apt-get install -y nodejs'
    when: files_list.stdout.find("login-app") == -1
   -
-   name: 'create react app'
-   command: 'npx create-react-app login'
-  -
    name: 'clone git repo'
    command: 'git clone {{gitPath}}'
-  -
-   name: 'moving node modules'
-   command: 'mv login/node_modules {{repoName}}'
-  -
-   name: 'remove unwanted files'
-   command: 'rm -rf login'
-  -
-   name: 'install react-router-dom'
-   command: chdir='{{appPath}}' npm install react-router-dom
-  -
-   name: 'install validator'
-   command: chdir='{{appPath}}' npm install validator
   -
    name: 'delete old app before updating to new one'
    command: chdir='{{appInPath}}' rm -rf login-app
@@ -58,6 +43,9 @@
   -
    name: 'remove old dir'
    command: chdir='{{appInPath}}' rm -rf '{{repoName}}'
+  -
+   name: 'install dependencies'
+   command: chdir='{{appInPath}}/login-app' npm install
   -
    name: 'start running app in background'
    command: chdir='{{appInPath}}/login-app' nohup npm start </dev/null >/dev/null 2>&1 &
