@@ -5,7 +5,7 @@
   gitPath: 'https://github.com/Tanmay-More/Login-Page.git'
   repoName: 'Login-Page'
   appPath: '/home/ubuntu/{{repoName}}'
-  appInPath: '/home/ubuntu/'
+  appInPath: '/home/ubuntu'
  tasks:
   -
    name: 'checking files'
