@@ -48,4 +48,4 @@
    command: chdir='{{appInPath}}/login-app' npm install
   -
    name: 'start running app in background'
-   command: chdir='{{appInPath}}/login-app' nohup npm start </dev/null >/dev/null 2>&1 &
+   shell: chdir='{{appInPath}}/login-app' ./new.sh
