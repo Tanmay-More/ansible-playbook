@@ -4,8 +4,8 @@
  vars:
   gitPath: 'https://github.com/Tanmay-More/Login-Page.git'
   repoName: 'Login-Page'
-  appPath: '/home/dell/Desktop/Ansible/first/{{repoName}}'
-  appInPath: '/home/dell/Desktop/Ansible/first'
+  appPath: '/home/test-ubuntu/Desktop/{{repoName}}'
+  appInPath: '/home/test-ubuntu/Desktop'
  tasks:
   -
    name: 'checking files'
