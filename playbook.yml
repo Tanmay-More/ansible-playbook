@@ -4,8 +4,8 @@
  vars:
   gitPath: 'https://github.com/Tanmay-More/Login-Page.git'
   repoName: 'Login-Page'
-  appPath: '/home/ubuntu/{{repoName}}'
-  appInPath: '/home/ubuntu'
+  appPath: '/home/ubuntu/workspace/sample-job/{{repoName}}'
+  appInPath: '/home/ubuntu/workspace/sample-job'
  tasks:
   -
    name: 'checking files'
