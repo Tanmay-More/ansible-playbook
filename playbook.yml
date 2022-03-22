@@ -12,6 +12,10 @@
    command: chdir='{{appInPath}}' ls
    register: files_list
   -
+   name: 'killing previous process at 3000'
+   shell: 'sudo kill -9 $(sudo lsof -t -i:3000)'
+   when: files_list.stdout.find("login-app") != -1
+  -
    name: 'updating package list'
    shell: 'sudo apt update'
    when: files_list.stdout.find("login-app") == -1
