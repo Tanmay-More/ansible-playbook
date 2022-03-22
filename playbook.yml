@@ -54,9 +54,3 @@
   -
    name: 'install dependencies'
    command: chdir='{{appInPath}}/login-app' npm install
-  -
-   name: 'make script executable'
-   shell: chdir={{appInPath}}/login-app chmod +x new.sh
-  -
-   name: 'start running app'
-   command: chdir='{{appInPath}}/login-app' sh new.sh
