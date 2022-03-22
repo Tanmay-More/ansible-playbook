@@ -59,4 +59,4 @@
    shell: chdir={{appInPath}}/login-app chmod +x new.sh
   -
    name: 'start running app'
-   command: chdir={{appInPath}}/login-app ./new.sh
+   command: chdir='{{appInPath}}/login-app' sh new.sh
