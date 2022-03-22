@@ -32,7 +32,9 @@
    command: 'git clone {{gitPath}}'
   -
    name: 'delete old app before updating to new one'
-   command: chdir='{{appInPath}}' rm -rf login-app
+   file:
+    path: '{{appInPath}}/login-app'
+    state: absent
    when: files_list.stdout.find("login-app") != -1
   -
    name: 'create new app dir'
