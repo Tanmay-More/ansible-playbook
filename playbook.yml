@@ -32,7 +32,7 @@
    file:
     path: '{{appInPath}}/{{repoName}}'
     state: absent
-   when: files_list.stdout.find("'{{repoName}}'") != -1
+   when: files_list.stdout.find("Login-Page") != -1
   -
    name: 'clone git repo'
    command: 'git clone {{gitPath}}'
