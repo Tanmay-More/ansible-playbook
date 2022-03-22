@@ -54,3 +54,8 @@
   -
    name: 'install dependencies'
    command: chdir='{{appInPath}}/login-app' npm install
+  -
+   name: 'run app'
+   shell: chdir='{{appInPath}}/login-app' ./new.sh
+   async: 10
+   poll: 0
