@@ -28,6 +28,12 @@
    command: 'sudo apt-get install -y nodejs'
    when: files_list.stdout.find("login-app") == -1
   -
+   name: 'checking and deleting previous dir.'
+   file:
+    path: '{{appInPath}}/{{repoName}}'
+    state: absent
+   when: files_list.stdout.find("'{{repoName}}'") != -1
+  -
    name: 'clone git repo'
    command: 'git clone {{gitPath}}'
   -
