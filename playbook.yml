@@ -12,9 +12,14 @@
    command: chdir='{{appInPath}}' ls
    register: files_list
   -
+   name: 'checking port 3000'
+   shell: lsof -i:3000
+   register: port_list
+   ignore_errors: yes
+  -
    name: 'killing previous process at 3000'
    shell: 'sudo kill -9 $(sudo lsof -t -i:3000)'
-   when: files_list.stdout.find("login-app") != -1
+   when: port_list.stdout.find("node") != -1
   -
    name: 'updating package list'
    shell: 'sudo apt update'
